@@ -1,0 +1,322 @@
+Ôr@Ÿªassertions¤code´customTransformCache¬dependencies¢id¤meta±moduleSideEffects¬originalCode±originalSourcemap«resolvedIds®sourcemapChainµsyntheticNamedExportsµtransformDependencies®transformFiles¨cacheAstÔrAÚ!Æif (!("finalizeConstruction" in ViewPU.prototype)) {
+    Reflect.set(ViewPU.prototype, "finalizeConstruction", () => { });
+}
+import router from "@ohos.router";
+import promptAction from "@ohos.promptAction";
+class Message {
+    constructor(title, content, read) {
+        this.title = title;
+        this.content = content;
+        this.read = read;
+    }
+}
+class NotificationPage extends ViewPU {
+    constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
+        super(parent, __localStorage, elmtId, extraInfo);
+        if (typeof paramsLambda === "function") {
+            this.paramsGenerator_ = paramsLambda;
+        }
+        this.__messages = new ObservedPropertyObjectPU([
+            new Message('é—¨ç¦å¼‚å¸¸', '2024-06-01 18:30 é—¨ç¦å¼‚å¸¸æŠ¥è­¦', false),
+            new Message('å¼€é—¨æˆåŠŸ', '2024-06-01 08:00 è¿œç¨‹å¼€é—¨æˆåŠŸ', true)
+        ], this, "messages");
+        this.setInitiallyProvidedValue(params);
+        this.finalizeConstruction();
+    }
+    setInitiallyProvidedValue(params) {
+        if (params.messages !== undefined) {
+            this.messages = params.messages;
+        }
+    }
+    updateStateVars(params) {
+    }
+    purgeVariableDependenciesOnElmtId(rmElmtId) {
+        this.__messages.purgeDependencyOnElmtId(rmElmtId);
+    }
+    aboutToBeDeleted() {
+        this.__messages.aboutToBeDeleted();
+        SubscriberManager.Get().delete(this.id__());
+        this.aboutToBeDeletedInternal();
+    }
+    get messages() {
+        return this.__messages.get();
+    }
+    set messages(newValue) {
+        this.__messages.set(newValue);
+    }
+    markAllRead() {
+        this.messages = this.messages.map((msg) => new Message(msg.title, msg.content, true));
+        promptAction.showToast({ message: 'å…¨éƒ¨å·²è¯»' });
+    }
+    clearAll() {
+        this.messages = [];
+        promptAction.showToast({ message: 'æ¶ˆæ¯å·²æ¸…ç©º' });
+    }
+    initialRender() {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width('100%');
+            Column.height('100%');
+            Column.backgroundColor('#f5f5f5');
+            Column.alignItems(HorizontalAlign.Center);
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('æ¶ˆæ¯é€šçŸ¥');
+            Text.fontSize(24);
+            Text.fontWeight(FontWeight.Bold);
+            Text.margin({ top: 50, bottom: 30 });
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create();
+            Row.width('90%');
+            Row.justifyContent(FlexAlign.SpaceBetween);
+            Row.margin({ bottom: 20 });
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('å…¨éƒ¨å·²è¯»', { type: ButtonType.Normal });
+            Button.backgroundColor('#1677FF');
+            Button.fontColor(Color.White);
+            Button.width(120);
+            Button.height(40);
+            Button.onClick(() => this.markAllRead());
+        }, Button);
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('æ¸…ç©º', { type: ButtonType.Normal });
+            Button.backgroundColor('#FF4759');
+            Button.fontColor(Color.White);
+            Button.width(120);
+            Button.height(40);
+            Button.onClick(() => this.clearAll());
+        }, Button);
+        Button.pop();
+        Row.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            List.create({ space: 12 });
+            List.width('90%');
+            List.layoutWeight(1);
+            List.backgroundColor('#f5f5f5');
+        }, List);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            ForEach.create();
+            const forEachItemGenFunction = _item => {
+                const msg = _item;
+                {
+                    const itemCreation = (elmtId, isInitialRender) => {
+                        ViewStackProcessor.StartGetAccessRecordingFor(elmtId);
+                        itemCreation2(elmtId, isInitialRender);
+                        if (!isInitialRender) {
+                            ListItem.pop();
+                        }
+                        ViewStackProcessor.StopGetAccessRecording();
+                    };
+                    const itemCreation2 = (elmtId, isInitialRender) => {
+                        ListItem.create(deepRenderFunction, true);
+                    };
+                    const deepRenderFunction = (elmtId, isInitialRender) => {
+                        itemCreation(elmtId, isInitialRender);
+                        this.observeComponentCreation2((elmtId, isInitialRender) => {
+                            Column.create();
+                            Column.backgroundColor(Color.White);
+                            Column.padding(16);
+                            Column.borderRadius(8);
+                            Column.width('100%');
+                        }, Column);
+                        this.observeComponentCreation2((elmtId, isInitialRender) => {
+                            Row.create();
+                            Row.width('100%');
+                            Row.margin({ bottom: 4 });
+                        }, Row);
+                        this.observeComponentCreation2((elmtId, isInitialRender) => {
+                            Text.create(msg.title);
+                            Text.fontSize(16);
+                            Text.fontWeight(msg.read ? FontWeight.Normal : FontWeight.Bold);
+                        }, Text);
+                        Text.pop();
+                        this.observeComponentCreation2((elmtId, isInitialRender) => {
+                            If.create();
+                            if (!msg.read) {
+                                this.ifElseBranchUpdateFunction(0, () => {
+                                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                        Text.create('æœªè¯»');
+                                        Text.fontSize(12);
+                                        Text.fontColor('#FF4759');
+                                        Text.margin({ left: 8 });
+                                    }, Text);
+                                    Text.pop();
+                                });
+                            }
+                            else {
+                                this.ifElseBranchUpdateFunction(1, () => {
+                                });
+                            }
+                        }, If);
+                        If.pop();
+                        Row.pop();
+                        this.observeComponentCreation2((elmtId, isInitialRender) => {
+                            Text.create(msg.content);
+                            Text.fontSize(14);
+                            Text.fontColor('#666');
+                            Text.width('100%');
+                        }, Text);
+                        Text.pop();
+                        Column.pop();
+                        ListItem.pop();
+                    };
+                    this.observeComponentCreation2(itemCreation2, ListItem);
+                    ListItem.pop();
+                }
+            };
+            this.forEachUpdateFunction(elmtId, this.messages, forEachItemGenFunction);
+        }, ForEach);
+        ForEach.pop();
+        List.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('è¿”å›', { type: ButtonType.Normal });
+            Button.width('90%');
+            Button.height(40);
+            Button.backgroundColor('#1677FF');
+            Button.fontColor(Color.White);
+            Button.margin({ bottom: 30 });
+            Button.onClick(() => router.pushUrl({ url: 'pages/MainPage' }));
+        }, Button);
+        Button.pop();
+        Column.pop();
+    }
+    rerender() {
+        this.updateDirtyElements();
+    }
+    static getEntryName() {
+        return "NotificationPage";
+    }
+}
+registerNamedRoute(() => new NotificationPage(undefined, {}), "", { bundleName: "com.xzgc.myapplication", moduleName: "entry", pagePath: "pages/NotificationPage", pageFullPath: "entry/src/main/ets/pages/NotificationPage", integratedHsp: "false", moduleType: "followWithHap" });
+//# sourceMappingURL=NotificationPage.js.mapÂ’Ùp hvigor_ignore_D:_devecostudio-windows-5.1.0.828_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.router.d.tsÙv hvigor_ignore_D:_devecostudio-windows-5.1.0.828_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.promptAction.d.tsÙ;D:\ClassSmart\entry\src\main\ets\pages\NotificationPage.etsÔrBšªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo°belongModulePath¬shouldEmitJs¥entryÃÂ³D:\ClassSmart\entry­D:\ClassSmart¥entry¥1.0.0Ô  ³D:\ClassSmart\entryÃÃÚpimport { router, promptAction } from '@kit.ArkUI';
+
+class Message {
+  title: string;
+  content: string;
+  read: boolean;
+  constructor(title: string, content: string, read: boolean) {
+    this.title = title;
+    this.content = content;
+    this.read = read;
+  }
+}
+
+@Entry
+@Component
+struct NotificationPage {
+  @State messages: Message[] = [
+    new Message('é—¨ç¦å¼‚å¸¸', '2024-06-01 18:30 é—¨ç¦å¼‚å¸¸æŠ¥è­¦', false),
+    new Message('å¼€é—¨æˆåŠŸ', '2024-06-01 08:00 è¿œç¨‹å¼€é—¨æˆåŠŸ', true)
+  ];
+
+  markAllRead() {
+    this.messages = this.messages.map((msg: Message) => new Message(msg.title, msg.content, true));
+    promptAction.showToast({ message: 'å…¨éƒ¨å·²è¯»' });
+  }
+
+  clearAll() {
+    this.messages = [];
+    promptAction.showToast({ message: 'æ¶ˆæ¯å·²æ¸…ç©º' });
+  }
+
+  build() {
+    Column() {
+      Text('æ¶ˆæ¯é€šçŸ¥')
+        .fontSize(24)
+        .fontWeight(FontWeight.Bold)
+        .margin({ top: 50, bottom: 30 })
+
+      Row() {
+        Button('å…¨éƒ¨å·²è¯»', { type: ButtonType.Normal })
+          .backgroundColor('#1677FF')
+          .fontColor(Color.White)
+          .width(120)
+          .height(40)
+          .onClick(() => this.markAllRead())
+        Button('æ¸…ç©º', { type: ButtonType.Normal })
+          .backgroundColor('#FF4759')
+          .fontColor(Color.White)
+          .width(120)
+          .height(40)
+          .onClick(() => this.clearAll())
+      }
+      .width('90%')
+      .justifyContent(FlexAlign.SpaceBetween)
+      .margin({ bottom: 20 })
+
+      List({ space: 12 }) {
+        ForEach(this.messages, (msg: Message) => {
+          ListItem() {
+            Column() {
+              Row() {
+                Text(msg.title)
+                  .fontSize(16)
+                  .fontWeight(msg.read ? FontWeight.Normal : FontWeight.Bold)
+                if (!msg.read) {
+                  Text('æœªè¯»')
+                    .fontSize(12)
+                    .fontColor('#FF4759')
+                    .margin({ left: 8 })
+                }
+              }
+              .width('100%')
+              .margin({ bottom: 4 })
+
+              Text(msg.content)
+                .fontSize(14)
+                .fontColor('#666')
+                .width('100%')
+            }
+            .backgroundColor(Color.White)
+            .padding(16)
+            .borderRadius(8)
+            .width('100%')
+          }
+        })
+      }
+      .width('90%')
+      .layoutWeight(1)
+      .backgroundColor('#f5f5f5')
+
+      Button('è¿”å›', { type: ButtonType.Normal })
+        .width('90%')
+        .height(40)
+        .backgroundColor('#1677FF')
+        .fontColor(Color.White)
+        .margin({ bottom: 30 })
+        .onClick(() => router.pushUrl({ url: 'pages/MainPage' }))
+    }
+    .width('100%')
+    .height('100%')
+    .backgroundColor('#f5f5f5')
+    .alignItems(HorizontalAlign.Center)
+  }
+} ÀÔrC’¬@ohos.router²@ohos.promptActionÔrD—ªassertions¨external¢id¤meta±moduleSideEffectsªresolvedByµsyntheticNamedExportsAÃÙp hvigor_ignore_D:_devecostudio-windows-5.1.0.828_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.router.d.tsAÃªoh-resolveÂDAÃÙv hvigor_ignore_D:_devecostudio-windows-5.1.0.828_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.promptAction.d.tsAÃªoh-resolveÂ“ÔrE–§version¤fileªsourceRoot§sources¥names¨mappings³NotificationPage.js ‘´NotificationPage.etsÜ º–”    ”  	”  ”  %”!  1”"  2–”    ”  ”  ”  %”-  1”.  2“”   ” ” —” ” ” ” ” ,”  .”$ ;—” ” ” 	” ” ” ” —” ” ” 	” ” ” ” —” 	” 	” 		” 	” 	” 	” 	’” 
+” 
+‘” ’” ” ‘”  ‘”7 š” ” ” ” ” ”  ”9 1”; 3”Ì@ 8”ÌA 9š” ” ” ” ” ”  ”9 1”; 3”? 7”Ì@ 8‘”	 ‘” ’” 	” ’” 	” ’” ” Ü ” ” ” 	” ” ” ” ”% !”& "”) %”* &”+ '”. 3”0 5”2 7”3 8”7 <”> ÌC”? ÌD”ÌB ÌG”ÌC ÌH”ÌH ÌM”ÌJ ÌO”ÌM ÌR”ÌN ÌS”ÌU ÌZ”ÌW Ì\”Ì[ Ì`”Ì\ Ìa”Ì] Ìb”Ì^ Ìcœ” ” ” ” ” ”! ”( $”* &”0 ,”2 .”3 /”4 0’” ” ’” ” 
+—” ” ” 	” ” ” ” œ” ” ” ” ” ”! ”( $”* &”1 -”3 /”4 0”5 1’” ” ‘” ’”  ”  
+–”  ”  
+” Ìb” Ìb
+” Ìb” Ìb–”  ”  
+” Ìc” Ìc” Ìc”  Ìc–”  ”  
+” Ìd”" Ìd”# Ìd”, Ìd˜”  ”  
+” Ìe” Ìe” Ìe”- Ìe”. Ìe ”4 Ìe&”” !” !
+” !” !–” !” !
+” "	” "” "” "˜” !” !
+” #	” #” #”& #”' #”+ ##” !” !
+” $	” $” $” $” $” $”! $”# $”) $!”+ $#”- $%”/ $'’” !” !
+’” &” &	–” &” &	” 4” 4” 4” 4˜” &” &	” 5” 5” 5”( 5”) 5 ”5 5,š” &” &	” 6” 6” 6” 6” 6”! 6”# 6”% 6œ” '” '”# '”) '”+ '”- '”1 '”3 '”= ')”> '*”ÌD '0”ÌF '2–” '” '” (”" (”# (”, ($˜” '” '” )” )” )”" )”# )”( ) –” '” '” *” *” *” *–” '” '” +” +” +” +œ” '” '” ,” ,” ,” ,”  ,”! ,”% ,”& ,”1 ,)”3 ,+’” '” 'œ” -” -”# -”' -”) -”+ -”/ -”1 -”; -'”< -(”ÌB -.”ÌD -0–” -” -” .”" .”# .”, .$˜” -” -” /” /” /”" /”# /”( / –” -” -” 0” 0” 0” 0–” -” -” 1” 1” 1” 1œ” -” -” 2” 2” 2” 2”  2”! 2”% 2”& 2”. 2&”0 2(’” -” -’” &” &	˜” 8” 8
+” 8” 8” 8”! 8”# 8”% 8–” 8” 8
+” ÌV” ÌV” ÌV” ÌV–” 8” 8
+” ÌW” ÌW” ÌW” ÌW–” 8” 8
+” ÌX”  ÌX”! ÌX”* ÌX ’” 9” 9’” :
+”$ :’” ;”" ;˜” ;”" ;”# ÌO”2 ÌO”3 ÌO”8 ÌO"”9 ÌO#”> ÌO(–” ;”" ;”# ÌP”* ÌP”+ ÌP”- ÌP–” ;”" ;”# ÌQ”/ ÌQ”0 ÌQ”1 ÌQ–” ;”" ;”# ÌR”( ÌR”) ÌR”/ ÌR’” <” <–” <” <”  ÌG”% ÌG”& ÌG”, ÌGš” <” <”  ÌH”& ÌH”' ÌH”) ÌH”/ ÌH”1 ÌH ”2 ÌH!”4 ÌH#–” =”  =”( =”+ =”, =”1 =–” =”  =”! >”) >”* >”, >Ü ” =”  =”! ?”+ ?”, ?”/ ?!”0 ?"”4 ?&”5 ?'”6 ?(”7 ?)”ÌA ?3”ÌB ?4”ÌH ?:”ÌI ?;”ÌJ ?<”ÌK ?=”ÌU ?ÌG”ÌV ?ÌH”ÌZ ?ÌL’” =” =—” Ì@”  Ì@”! Ì@”$ Ì@”% Ì@”) Ì@”+ Ì@””( ÌA”, ÌA”4 ÌA”8 ÌA–”( ÌA”, ÌA”- ÌB”5 ÌB”6 ÌB”8 ÌB –”( ÌA”, ÌA”- ÌC”6 ÌC”7 ÌC”Ì@ ÌC(š”( ÌA”, ÌA”- ÌD”3 ÌD”4 ÌD”6 ÌD”: ÌD"”< ÌD$”= ÌD%”? ÌD'’”$ ÌA”( ÌA‘” ÌE‘” ÌE’” <” <–” ÌJ”  ÌJ”( ÌJ”+ ÌJ”, ÌJ”3 ÌJ–” ÌJ”  ÌJ”! ÌK”) ÌK”* ÌK”, ÌK–” ÌJ”  ÌJ”! ÌL”* ÌL”+ ÌL”1 ÌL!–” ÌJ”  ÌJ”! ÌM”& ÌM”' ÌM”- ÌM’” ÌJ” ÌJ’” ;” ;’” :
+”  :’” :
+” :””/ 9”3 9”4 9”< 9’” 9” 9’” 8” 8
+œ” ÌZ” ÌZ”# ÌZ”' ÌZ”) ÌZ”+ ÌZ”/ ÌZ”1 ÌZ”; ÌZ%”< ÌZ&”ÌB ÌZ,”ÌD ÌZ.–” ÌZ” ÌZ” Ì[	” Ì[” Ì[” Ì[–” ÌZ” ÌZ” Ì\	” Ì\” Ì\” Ì\–” ÌZ” ÌZ” Ì]	”" Ì]”# Ì]”, Ì]"˜” ÌZ” ÌZ” Ì^	” Ì^” Ì^”" Ì^”# Ì^”( Ì^š” ÌZ” ÌZ” Ì_	” Ì_” Ì_” Ì_”" Ì_”$ Ì_”& Ì_”( Ì_Ü ” ÌZ” ÌZ” Ì`	” Ì`” Ì`” Ì`”  Ì`”! Ì`”' Ì`”( Ì`”/ Ì`%”0 Ì`&”2 Ì`(”5 Ì`+”7 Ì`-”ÌG Ì`=”ÌI Ì`?”ÌJ Ì`Ì@’” ÌZ” ÌZ’”  ”  
+‘” ÌfÔrF–§version¤file§sources®sourcesContent¥names¨mappingsÀ‘À‘ÀÜ Ã‘”    ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”  	 ‘”  
+ ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”    ‘”  ! ‘”  " ‘”  # ‘”  $ ‘”  % ‘”  & ‘”  ' ‘”  ( ‘”  ) ‘”  * ‘”  + ‘”  , ‘”  - ‘”  . ‘”  / ‘”  0 ‘”  1 ‘”  2 ‘”  3 ‘”  4 ‘”  5 ‘”  6 ‘”  7 ‘”  8 ‘”  9 ‘”  : ‘”  ; ‘”  < ‘”  = ‘”  > ‘”  ? ‘”  Ì@ ‘”  ÌA ‘”  ÌB ‘”  ÌC ‘”  ÌD ‘”  ÌE ‘”  ÌF ‘”  ÌG ‘”  ÌH ‘”  ÌI ‘”  ÌJ ‘”  ÌK ‘”  ÌL ‘”  ÌM ‘”  ÌN ‘”  ÌO ‘”  ÌP ‘”  ÌQ ‘”  ÌR ‘”  ÌS ‘”  ÌT ‘”  ÌU ‘”  ÌV ‘”  ÌW ‘”  ÌX ‘”  ÌY ‘”  ÌZ ‘”  Ì[ ‘”  Ì\ ‘”  Ì] ‘”  Ì^ ‘”  Ì_ ‘”  Ì` ‘”  Ìa ‘”  Ìb ‘”  Ìc ‘”  Ìd ‘”  Ìe ‘”  Ìf ‘”  Ìg ‘”  Ìh ‘”  Ìi ‘”  Ìj ‘”  Ìk ‘”  Ìl ‘”  Ìm ‘”  Ìn ‘”  Ìo ‘”  Ìp ‘”  Ìq ‘”  Ìr ‘”  Ìs ‘”  Ìt ‘”  Ìu ‘”  Ìv ‘”  Ìw ‘”  Ìx ‘”  Ìy ‘”  Ìz ‘”  Ì{ ‘”  Ì| ‘”  Ì} ‘”  Ì~ ‘”  Ì ‘”  Ì€ ‘”  Ì ‘”  Ì‚ ‘”  Ìƒ ‘”  Ì„ ‘”  Ì… ‘”  Ì† ‘”  Ì‡ ‘”  Ìˆ ‘”  Ì‰ ‘”  ÌŠ ‘”  Ì‹ ‘”  ÌŒ ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì‘ ‘”  Ì’ ‘”  Ì“ ‘”  Ì” ‘”  Ì• ‘”  Ì– ‘”  Ì— ‘”  Ì˜ ‘”  Ì™ ‘”  Ìš ‘”  Ì› ‘”  Ìœ ‘”  Ì ‘”  Ì ‘”  ÌŸ ‘”  Ì  ‘”  Ì¡ ‘”  Ì¢ ‘”  Ì£ ‘”  Ì¤ ‘”  Ì¥ ‘”  Ì¦ ‘”  Ì§ ‘”  Ì¨ ‘”  Ì© ‘”  Ìª ‘”  Ì« ‘”  Ì¬ ‘”  Ì­ ‘”  Ì® ‘”  Ì¯ ‘”  Ì° ‘”  Ì± ‘”  Ì² ‘”  Ì³ ‘”  Ì´ ‘”  Ìµ ‘”  Ì¶ ‘”  Ì· ‘”  Ì¸ ‘”  Ì¹ ‘”  Ìº ‘”  Ì» ‘”  Ì¼ ‘”  Ì½ ‘”  Ì¾ ‘”  Ì¿ ‘”  ÌÀ ‘”  ÌÁ ‘”  ÌÂ ÔrG’§missing¦pluginÃ¦genAbcÂÔ  ÔrH”²dynamicImportCache¹exportAllDeclarationCache»exportNamedDeclarationCache«importCache’ÔrI•¤type¥start£endªspecifiers¦source±ImportDeclarationÌ€Ì¢‘ÔrJ”¤type¥start£end¥local¶ImportDefaultSpecifierÌ‡ÌÔrK”¤type¥start£end¤nameªIdentifierÌ‡Ì¦routerÔrL•¤type¥start£end¥value£raw§LiteralÌ“Ì¡¬@ohos.router®"@ohos.router"I±ImportDeclarationÌ¤ÌÒ‘J¶ImportDefaultSpecifierÌ«Ì·KªIdentifierÌ«Ì·¬promptActionL§LiteralÌ½ÌÑ²@ohos.promptAction´"@ohos.promptAction"
